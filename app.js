@@ -12,12 +12,16 @@ const connectDB = require('./db/connect')
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandler = require('./middleware/error-handler')
 
+const authRouter = require('./routes/authRoutes')
+
 app.use(morgan('tiny'))
 app.use(express.json())
 
 app.get('/',(req,res) => {
     res.send('e-commerce api')
 })
+
+app.use('/api/v1/auth',authRouter)
 
 
 
