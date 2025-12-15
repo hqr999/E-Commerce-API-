@@ -12,7 +12,7 @@ const {
 router.route("/").get(pegaTodosUsuarios);
 
 router.route("/showMe").get(mostraUsuarioAtual);
-router.route("/updateUser").post(atualizaUsuario);
+router.route("/updateUser").patch(atualizaUsuario);
 router.route("/updateUserPassword").post(atualizaSenha);
 
 router.route("/:id").get(pegaUnicoUsuario);

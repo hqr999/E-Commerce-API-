@@ -3,7 +3,7 @@ const pegaTodosUsuarios = async (req, res) => {
 };
 
 const pegaUnicoUsuario = async (req, res) => {
-  res.send("Pega um único usuário");
+  res.send(req.params);
 };
 
 const mostraUsuarioAtual = async (req, res) => {
@@ -11,7 +11,7 @@ const mostraUsuarioAtual = async (req, res) => {
 };
 
 const atualizaUsuario = async (req, res) => {
-  res.send("Atualiza usuário");
+  res.send(req.body);
 };
 
 const atualizaSenha = async (req, res) => {
