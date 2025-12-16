@@ -13,7 +13,7 @@ const {
   authorizePermissions,
 } = require("../middleware/authentication");
 
-router.route("/").get(authenticateUser,authorizePermissions,pegaTodosUsuarios);
+router.route("/").get(authenticateUser,authorizePermissions('admin','owner'),pegaTodosUsuarios);
 
 router.route("/showMe").get(mostraUsuarioAtual);
 router.route("/updateUser").patch(atualizaUsuario);
