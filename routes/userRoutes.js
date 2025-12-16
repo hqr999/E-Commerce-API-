@@ -15,9 +15,9 @@ const {
 
 router.route("/").get(authenticateUser,authorizePermissions('admin','owner'),pegaTodosUsuarios);
 
-router.route("/showMe").get(mostraUsuarioAtual);
+router.route("/showMe").get(authenticateUser,mostraUsuarioAtual);
 router.route("/updateUser").patch(atualizaUsuario);
-router.route("/updateUserPassword").post(atualizaSenha);
+router.route("/updateUserPassword").patch(authenticateUser,atualizaSenha);
 
 router.route("/:id").get(authenticateUser, pegaUnicoUsuario);
 

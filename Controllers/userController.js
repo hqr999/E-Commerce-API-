@@ -17,7 +17,7 @@ const pegaUnicoUsuario = async (req, res) => {
 };
 
 const mostraUsuarioAtual = async (req, res) => {
-  res.send("Mostrar usuário atual");
+  res.status(StatusCodes.OK).json({ user: req.user });
 };
 
 const atualizaUsuario = async (req, res) => {
@@ -25,7 +25,19 @@ const atualizaUsuario = async (req, res) => {
 };
 
 const atualizaSenha = async (req, res) => {
-  res.send("Atualiza senha atual");
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword) {
+    throw new CustomError.BadRequestError("Por favor dê os dois valores");
+  }
+  const user = await User.findOne({ _id: req.user.userId });
+
+  const isPasswordCorrect = await user.comparePassword(oldPassword);
+  if (!isPasswordCorrect) {
+    throw new CustomError.UnauthenticatedError("Credenciais inválidas");
+  }
+  user.password = newPassword;
+  await user.save();
+  res.status(StatusCodes.OK).json({ msg: "Sucesso! Senha mudada" });
 };
 
 module.exports = {
